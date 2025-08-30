@@ -1,0 +1,250 @@
+:root {
+  --emergency-red: #dc3545;
+  --emergency-red-dark: #c82333;
+  --emergency-red-light: #f5c6cb;
+  --emergency-bg: #f5f7fa;
+  --emergency-white: #ffffff;
+  --emergency-gray: #6c757d;
+  --emergency-gray-light: #e9ecef;
+  --emergency-success: #28a745;
+  --emergency-warning: #ffc107;
+  --emergency-info: #17a2b8;
+  --emergency-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --emergency-shadow-strong: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --emergency-border-radius: 8px;
+  --emergency-transition: all 0.3s ease;
+}
+
+/* Emergency-specific overrides */
+.emergency-header {
+  color: var(--emergency-red);
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.emergency-card {
+  background: var(--emergency-white);
+  border-radius: var(--emergency-border-radius);
+  box-shadow: var(--emergency-shadow);
+  transition: var(--emergency-transition);
+  border: 1px solid var(--emergency-gray-light);
+}
+
+.emergency-card:hover {
+  box-shadow: var(--emergency-shadow-strong);
+  transform: translateY(-2px);
+}
+
+.emergency-button {
+  min-height: 44px;
+  border-radius: var(--emergency-border-radius);
+  font-weight: 600;
+  transition: var(--emergency-transition);
+  touch-action: manipulation;
+}
+
+.emergency-button-primary {
+  background-color: var(--emergency-red);
+  border-color: var(--emergency-red);
+  color: var(--emergency-white);
+}
+
+.emergency-button-primary:hover {
+  background-color: var(--emergency-red-dark);
+  border-color: var(--emergency-red-dark);
+  transform: translateY(-1px);
+}
+
+.emergency-input {
+  min-height: 44px;
+  border-radius: var(--emergency-border-radius);
+  border: 2px solid var(--emergency-gray-light);
+  transition: var(--emergency-transition);
+  font-size: 16px;
+}
+
+.emergency-input:focus {
+  border-color: var(--emergency-red);
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+  outline: none;
+}
+
+.emergency-textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+/* SOS Button Pulse Animation */
+.sos-pulse {
+  animation: sos-pulse-animation 2s infinite;
+  box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+}
+
+@keyframes sos-pulse-animation {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(220, 53, 69, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+  }
+}
+
+/* Loading states */
+.emergency-loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.emergency-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(220, 53, 69, 0.1),
+    transparent
+  );
+  animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Urgency level indicators */
+.urgency-low {
+  border-left: 4px solid var(--emergency-success);
+}
+
+.urgency-medium {
+  border-left: 4px solid var(--emergency-warning);
+}
+
+.urgency-high {
+  border-left: 4px solid var(--emergency-red);
+}
+
+.urgency-critical {
+  border-left: 4px solid var(--emergency-red);
+  background: linear-gradient(135deg, var(--emergency-white) 0%, var(--emergency-red-light) 100%);
+}
+
+/* Medical icons styling */
+.medical-icon {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* Error states */
+.emergency-error {
+  background-color: var(--emergency-red-light);
+  border: 1px solid var(--emergency-red);
+  color: var(--emergency-red-dark);
+  border-radius: var(--emergency-border-radius);
+}
+
+/* Success states */
+.emergency-success {
+  background-color: #d4edda;
+  border: 1px solid var(--emergency-success);
+  color: #155724;
+  border-radius: var(--emergency-border-radius);
+}
+
+/* Accessibility enhancements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .emergency-card {
+    border: 2px solid var(--emergency-gray);
+  }
+  
+  .emergency-button-primary {
+    border: 2px solid var(--emergency-red-dark);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .sos-pulse {
+    animation: none;
+  }
+  
+  .emergency-card,
+  .emergency-button,
+  .emergency-input {
+    transition: none;
+  }
+  
+  .emergency-loading::after {
+    animation: none;
+  }
+}
+
+/* Focus indicators for keyboard navigation */
+.emergency-button:focus,
+.emergency-input:focus {
+  outline: 3px solid var(--emergency-red);
+  outline-offset: 2px;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 640px) {
+  .emergency-card {
+    margin-bottom: 1rem;
+  }
+  
+  .emergency-button {
+    width: 100%;
+    min-height: 48px;
+  }
+  
+  .emergency-input {
+    min-height: 48px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
+/* Print styles for emergency information */
+@media print {
+  .sos-pulse {
+    animation: none;
+    box-shadow: none;
+  }
+  
+  .emergency-card {
+    box-shadow: none;
+    border: 1px solid #000;
+    break-inside: avoid;
+  }
+  
+  .emergency-header {
+    color: #000;
+    text-shadow: none;
+  }
+}
